@@ -20,6 +20,8 @@
   "bugs": {
     "url": "https://github.com/readfwd/readfwd.com/issues"
   },
-  "homepage": "https://github.com/readfwd/readfwd.com"
+  "homepage": "https://github.com/readfwd/readfwd.com",
+  "devDependencies": {
+    "gulp": "^3.8.6"
+  }
 }
-

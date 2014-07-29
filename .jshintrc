@@ -90,6 +90,7 @@
 
     // Custom Globals
     "predef"        : [
+        "require",
         "Meteor",
         "Accounts",
         "Session",
