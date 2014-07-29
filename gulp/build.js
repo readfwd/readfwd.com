@@ -3,9 +3,7 @@
 var gulp = require('gulp');
 var browserify = require('gulp-browserify');
 
-gulp.task('build', ['html', 'js', 'css'], function () {
-  console.log('build task');
-});
+gulp.task('build', ['html', 'js', 'css']);
 
 gulp.task('html', function () {
   gulp.src('./app/*.html')
