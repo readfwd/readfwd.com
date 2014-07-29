@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/readfwd/readfwd.com",
   "devDependencies": {
-    "gulp": "^3.8.6"
+    "gulp": "^3.8.6",
+    "require-dir": "^0.1.0"
   }
 }
