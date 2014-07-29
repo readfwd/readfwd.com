@@ -91,6 +91,6 @@
     // Custom Globals
     "predef"        : [
         "require",
-        "module",
+        "module"
     ]       // additional predefined global variables
 }
