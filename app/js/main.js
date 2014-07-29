@@ -1,4 +1,8 @@
-var $ = require('jQuery');
+module.exports = {
+  launch: function () {
+    window.app = this;
+  }
+};
 
-console.log($('body').hasClass('something'));
+module.exports.launch();
 
