@@ -91,20 +91,6 @@
     // Custom Globals
     "predef"        : [
         "require",
-        "Meteor",
-        "Accounts",
-        "Session",
-        "Template",
-        "check",
-        "Match",
-        "Deps",
-        "EJSON",
-        "Email",
-        "Package",
-        "Npm",
-        "Assets",
-        "Packages",
-        "process",
-        "Tinytest"
+        "module",
     ]       // additional predefined global variables
 }

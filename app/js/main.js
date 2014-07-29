@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   launch: function () {
     window.app = this;
