@@ -1,0 +1,25 @@
+{
+  "name": "readfwd.com",
+  "version": "0.1.0",
+  "description": "Source code for the readfwd.com website.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/readfwd/readfwd.com"
+  },
+  "keywords": [
+    "readfwd",
+    "read",
+    "forward"
+  ],
+  "author": "ReadFwd LLC",
+  "license": "CC-BY-NC-SA",
+  "bugs": {
+    "url": "https://github.com/readfwd/readfwd.com/issues"
+  },
+  "homepage": "https://github.com/readfwd/readfwd.com"
+}
+
