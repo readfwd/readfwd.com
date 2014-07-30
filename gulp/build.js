@@ -9,7 +9,7 @@ var $ = config.plugins;
 var istanbul = require('browserify-istanbul');
 
 gulp.task('clean', function () {
-  return gulp.src(paths.tmp, {read: true})
+  return gulp.src(paths.tmp, { read: false })
     .pipe($.rimraf());
 });
 
