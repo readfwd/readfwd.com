@@ -6,6 +6,8 @@ var config = require('./_config.js');
 var paths = config.paths;
 var $ = config.plugins;
 
+var source = require('vinyl-source-stream');
+var browserify = require('browserify');
 var istanbul = require('browserify-istanbul');
 
 gulp.task('clean', function () {
@@ -29,12 +31,14 @@ gulp.task('jade', function () {
 });
 
 gulp.task('js', function () {
-  return gulp.src(paths.app + '/js/main.js', { read: false })
-    .pipe($.browserify({
-      transform: [istanbul],
-      debug: true
-    }))
-    .pipe(gulp.dest(paths.tmp + '/js'));
+  var bundleStream = browserify(paths.app + '/js/main.js')
+    .transform(istanbul)
+    .bundle();
+
+  bundleStream
+    .pipe(source(paths.app + '/js/main.js'))
+    .pipe($.rename('main.js'))
+    .pipe(gulp.dest(paths.tmp + '/js/'));
 });
 
 gulp.task('css', function () {
