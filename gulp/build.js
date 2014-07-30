@@ -32,7 +32,7 @@ gulp.task('js', function () {
   return gulp.src(paths.app + '/js/main.js', { read: false })
     .pipe($.browserify({
       transform: [istanbul],
-      debug: false
+      debug: true
     }))
     .pipe(gulp.dest(paths.tmp + '/js'));
 });
