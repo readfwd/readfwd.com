@@ -5,6 +5,7 @@ var gulp = require('gulp');
 var config = require('./_config.js');
 var paths = config.paths;
 var $ = config.plugins;
+
 var istanbul = require('browserify-istanbul');
 
 gulp.task('clean', function () {
