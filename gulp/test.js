@@ -12,11 +12,11 @@ var karmaConf = {
   browsers: ['PhantomJS'],
   frameworks: ['mocha'],
   files: [
-    './dist/**/*.js',
+    paths.tmp + '/**/*.js',
     './node_modules/should/should.min.js',
     './test/**/*.spec.js'
   ],
-  reporters: ['progress']
+  reporters: ['progress', 'osx']
 };
 
 gulp.task('test', function (done) {
