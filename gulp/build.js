@@ -1,19 +1,42 @@
 'use strict';
 
 var gulp = require('gulp');
-var browserify = require('gulp-browserify');
 
-gulp.task('build', ['html', 'js', 'css']);
+var config = require('./_config.js');
+var paths = config.paths;
+var $ = config.plugins;
+
+gulp.task('clean', function () {
+  return gulp.src(paths.tmp, {read: true})
+    .pipe($.rimraf());
+});
+
+gulp.task('build', ['clean'], function() {
+  gulp.start(['index.html', 'js', 'css']);
+});
 
 gulp.task('html', function () {
-  gulp.src('./app/*.html')
-    .pipe(gulp.dest('./dist'));
+  return gulp.src(paths.app + '/*.html')
+    .pipe(gulp.dest(paths.tmp));
+});
+
+gulp.task('index.html', function () {
+  return gulp.src(paths.app + '/index.jade')
+    .pipe($.jade({
+      pretty: true
+    }))
+    .pipe(gulp.dest(paths.tmp));
+});
+
+gulp.task('jade', function () {
+  return gulp.src(paths.app + '/*.html')
+    .pipe(gulp.dest(paths.tmp));
 });
 
 gulp.task('js', function () {
-  gulp.src('./app/js/main.js')
-    .pipe(browserify())
-    .pipe(gulp.dest('./dist/js'));
+  return gulp.src(paths.app + '/js/main.js')
+    .pipe($.browserify())
+    .pipe(gulp.dest(paths.tmp + '/js'));
 });
 
 gulp.task('css', function () {

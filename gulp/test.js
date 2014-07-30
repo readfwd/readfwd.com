@@ -1,6 +1,11 @@
 'use strict';
 
 var gulp = require('gulp');
+
+var config = require('./_config.js');
+var paths = config.paths;
+var $ = config.plugins;
+
 var karma = require('karma').server;
 
 var karmaConf = {
