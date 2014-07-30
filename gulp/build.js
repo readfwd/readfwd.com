@@ -29,7 +29,7 @@ gulp.task('jade', function () {
 });
 
 gulp.task('js', function () {
-  return gulp.src(paths.app + '/js/main.js')
+  return gulp.src(paths.app + '/js/main.js', { read: false })
     .pipe($.browserify({
       transform: [istanbul],
       debug: false

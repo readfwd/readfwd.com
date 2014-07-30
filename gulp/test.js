@@ -4,20 +4,22 @@ var gulp = require('gulp');
 
 var config = require('./_config.js');
 var paths = config.paths;
-var $ = config.plugins;
 
 var karma = require('karma').server;
 
 var karmaConf = {
   browsers: ['PhantomJS'],
   frameworks: ['mocha'],
+  preprocessors: {},
   files: [
-    paths.tmp + '/**/*.js',
+    paths.tmp + "/js/main.js",
     './node_modules/should/should.min.js',
-    './test/**/*.spec.js'
+    paths.test + '/**/*.spec.js'
   ],
-  reporters: ['progress', 'osx']
+  reporters: ['progress', 'osx', 'coverage']
 };
+
+karmaConf.preprocessors[paths.tmp + '/js/main.js'] = ['coverage'];
 
 gulp.task('test', function (done) {
   karma.start(karmaConf, done);
