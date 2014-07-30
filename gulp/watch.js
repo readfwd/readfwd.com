@@ -9,10 +9,11 @@ var $ = config.plugins;
 var browserSync = require('browser-sync');
 
 gulp.task('watch', ['build', 'serve'], function () {
-  gulp.watch('./app/**/*.html', ['html']);
-  gulp.watch('./app/**/*.js', ['js']);
+  gulp.watch(paths.app + '/index.jade', ['index.html']);
+  gulp.watch(paths.app + '/templates/*.jade', ['jade']);
+  gulp.watch(paths.app + '/**/*.js', ['js']);
 
-  gulp.watch('./dist/**/*').on('change', function () {
+  gulp.watch(paths.tmp + '/*').on('change', function () {
     browserSync.reload();
   });
 });
@@ -20,8 +21,7 @@ gulp.task('watch', ['build', 'serve'], function () {
 gulp.task('serve', function () {
   browserSync({
     server: {
-      baseDir: './dist'
+      baseDir: paths.tmp
     }
   });
 });
-

@@ -11,9 +11,7 @@ gulp.task('clean', function () {
     .pipe($.rimraf());
 });
 
-gulp.task('build', ['clean'], function() {
-  gulp.start(['index.html', 'js', 'css']);
-});
+gulp.task('build', ['index.html', 'js', 'css']);
 
 gulp.task('html', function () {
   return gulp.src(paths.app + '/*.html')
@@ -40,5 +38,7 @@ gulp.task('js', function () {
 });
 
 gulp.task('css', function () {
+  // FIXME
+  return gulp.src('mama');
 });
 
