@@ -20,8 +20,6 @@ gulp.task('clean', function () {
     .pipe($.rimraf());
 });
 
-gulp.task('build', ['index.html', 'js', 'css']);
-
 gulp.task('index.html', function () {
   return gulp.src(paths.app + '/index.jade')
     .pipe($.jade({
@@ -44,7 +42,7 @@ gulp.task('js', function () {
     .transform(istanbul)
     .bundle();
 
-  bundleStream
+  return bundleStream
     .pipe(source(paths.app + '/js/main.js'))
     .pipe($.rename('main.js'))
     .pipe(gulp.dest(paths.tmp + '/js/'));
@@ -53,5 +51,12 @@ gulp.task('js', function () {
 gulp.task('css', function () {
   // FIXME
   return gulp.src('mama');
+});
+
+gulp.task('build', ['index.html', 'js', 'css']);
+
+gulp.task('build:dist', ['build'], function () {
+  gulp.src(paths.tmp + '/**/*')
+    .pipe(gulp.dest(paths.dist));
 });
 

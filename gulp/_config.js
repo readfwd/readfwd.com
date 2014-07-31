@@ -10,3 +10,4 @@ module.exports.paths = {
   'test': './test',
   'templates': './app/templates'
 };
+

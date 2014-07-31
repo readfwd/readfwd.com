@@ -25,3 +25,12 @@ gulp.task('serve', function () {
     }
   });
 });
+
+gulp.task('serve:dist', function () {
+  browserSync({
+    server: {
+      baseDir: paths.dist
+    }
+  });
+});
+
