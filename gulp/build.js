@@ -61,7 +61,7 @@ gulp.task('css', function () {
 
 gulp.task('build', ['index.html', 'js', 'css']);
 
-gulp.task('build:dist', ['index.html', 'js:no-istanbul', 'css'], function () {
+gulp.task('prebuild:dist', ['index.html', 'js:no-istanbul', 'css'], function () {
   var jsFilter = $.filter('**/*.js');
   var cssFilter = $.filter('**/*.css');
   var htmlFilter = $.filter('**/*.html');
@@ -69,7 +69,6 @@ gulp.task('build:dist', ['index.html', 'js:no-istanbul', 'css'], function () {
 
   return gulp.src(paths.tmp + '/index.html')
     .pipe(assets)
-    .pipe($.rev())
 
     .pipe(jsFilter)
     .pipe($.uglify())
@@ -80,12 +79,23 @@ gulp.task('build:dist', ['index.html', 'js:no-istanbul', 'css'], function () {
 
     .pipe(assets.restore())
     .pipe($.useref())
-    .pipe($.revReplace())
 
     .pipe(htmlFilter)
     .pipe($.minifyHtml())
     .pipe(htmlFilter.restore())
     
+    .pipe(gulp.dest(paths.dist));
+});
+
+gulp.task('build:dist', ['prebuild:dist'], function(){
+  gulp.src(paths.dist + '/**/*')
+    .pipe($.manifest({
+      hash: true,
+      preferOnline: true,
+      network: ['http://*', 'https://*', '*'],
+      filename: 'app.manifest',
+      exclude: 'app.manifest'
+    }))
     .pipe(gulp.dest(paths.dist));
 });
 
