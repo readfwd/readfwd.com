@@ -46,7 +46,7 @@ gulp.task('css', function () {
 
 gulp.task('build', ['index.html', 'js', 'css']);
 
-gulp.task('build:prod', ['build'], function () {
+gulp.task('build:dist', ['build'], function () {
   gulp.src(paths.tmp + '/**/*')
     .pipe(gulp.dest(paths.dist));
 });
