@@ -7,5 +7,5 @@ var app = express();
 app.use(compression());
 
 app.use('/', express.static(__dirname + '/dist'));
-app.listen(process.env.port);
+app.listen(process.env.PORT);
 
