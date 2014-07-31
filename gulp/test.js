@@ -26,7 +26,7 @@ gulp.task('test', function (done) {
   karma.start(karmaConf, done);
 });
 
-gulp.task('test:once', function () {
+gulp.task('test:once', ['build'], function () {
   karma.start(_.assign({}, karmaConf, { singleRun: true }));
 });
 
