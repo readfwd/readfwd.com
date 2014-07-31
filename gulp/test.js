@@ -17,7 +17,14 @@ var karmaConf = {
     './node_modules/should/should.min.js',
     paths.test + '/**/*.spec.js'
   ],
-  reporters: ['mocha', 'osx', 'coverage']
+  reporters: ['mocha', 'osx', 'coverage'],
+  coverageReporter: {
+    type : 'lcov',
+    dir : 'coverage/',
+    subdir: function (browser) {
+      return browser.toLowerCase().split(/[ /-]/)[0];
+    }
+  }
 };
 
 karmaConf.preprocessors[paths.tmp + '/js/main.js'] = ['coverage'];
