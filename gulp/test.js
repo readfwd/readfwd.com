@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
+var _ = require('lodash');
 
 var config = require('./_config.js');
 var paths = config.paths;
@@ -23,5 +24,9 @@ karmaConf.preprocessors[paths.tmp + '/js/main.js'] = ['coverage'];
 
 gulp.task('test', function (done) {
   karma.start(karmaConf, done);
+});
+
+gulp.task('test:once', function () {
+  karma.start(_.assign({}, karmaConf, { singleRun: true }));
 });
 
