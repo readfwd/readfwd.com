@@ -35,6 +35,7 @@
     "karma": "^0.12.19",
     "karma-coverage": "git://github.com/readfwd/karma-coverage.git#master",
     "karma-mocha": "^0.1.6",
+    "karma-mocha-reporter": "^0.2.8",
     "karma-osx-reporter": "^0.1.0",
     "karma-phantomjs-launcher": "^0.1.4",
     "mocha": "^1.21.3",

@@ -16,7 +16,7 @@ var karmaConf = {
     './node_modules/should/should.min.js',
     paths.test + '/**/*.spec.js'
   ],
-  reporters: ['progress', 'osx', 'coverage']
+  reporters: ['mocha', 'osx', 'coverage']
 };
 
 karmaConf.preprocessors[paths.tmp + '/js/main.js'] = ['coverage'];
