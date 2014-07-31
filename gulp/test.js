@@ -64,3 +64,14 @@ gulp.task('pagespeed', ['build:dist'], function () {
   });
 });
 
+gulp.task('pagespeed:express', ['build:dist'], function () {
+  ngrok.connect(process.env.port, function(err, url) {
+    pagespeed({
+      url: url,
+      strategy: 'mobile'
+    }, function () {
+      process.exit(0);
+    });
+  });
+});
+
