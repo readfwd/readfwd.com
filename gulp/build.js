@@ -15,6 +15,11 @@ gulp.task('clean', function () {
     .pipe($.rimraf());
 });
 
+gulp.task('clean:dist', function () {
+  return gulp.src(paths.dist, { read: false })
+    .pipe($.rimraf());
+});
+
 gulp.task('index.html', function () {
   return gulp.src(paths.app + '/index.jade')
     .pipe($.jade({
@@ -39,6 +44,17 @@ gulp.task('js', function () {
     .pipe(gulp.dest(paths.tmp + '/js/'));
 });
 
+gulp.task('js:dist', function () {
+  var bundleStream = browserify(paths.app + '/js/main.js')
+    .bundle();
+
+  return bundleStream
+    .pipe(source(paths.app + '/js/main.js'))
+    .pipe($.rename('main.js'))
+    .pipe($.streamify($.uglify()))
+    .pipe(gulp.dest(paths.dist + '/js/'));
+});
+
 gulp.task('css', function () {
   // FIXME
   return gulp.src('mama');
@@ -46,7 +62,7 @@ gulp.task('css', function () {
 
 gulp.task('build', ['index.html', 'js', 'css']);
 
-gulp.task('build:dist', ['build'], function () {
+gulp.task('build:dist', ['index.html', 'js:dist', 'css'], function () {
   gulp.src(paths.tmp + '/**/*')
     .pipe(gulp.dest(paths.dist));
 });
