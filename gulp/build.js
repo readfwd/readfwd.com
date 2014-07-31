@@ -35,7 +35,7 @@ gulp.task('js', function () {
     .transform(istanbul)
     .bundle();
 
-  bundleStream
+  return bundleStream
     .pipe(source(paths.app + '/js/main.js'))
     .pipe($.rename('main.js'))
     .pipe(gulp.dest(paths.tmp + '/js/'));
