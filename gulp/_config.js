@@ -9,3 +9,4 @@ module.exports.paths = {
   'app': './app',
   'test': './test'
 };
+
