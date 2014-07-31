@@ -44,15 +44,14 @@ gulp.task('js', function () {
     .pipe(gulp.dest(paths.tmp + '/js/'));
 });
 
-gulp.task('js:dist', function () {
+gulp.task('js:no-istanbul', function () {
   var bundleStream = browserify(paths.app + '/js/main.js')
     .bundle();
 
   return bundleStream
     .pipe(source(paths.app + '/js/main.js'))
     .pipe($.rename('main.js'))
-    .pipe($.streamify($.uglify()))
-    .pipe(gulp.dest(paths.dist + '/js/'));
+    .pipe(gulp.dest(paths.tmp + '/js/'));
 });
 
 gulp.task('css', function () {
@@ -62,8 +61,31 @@ gulp.task('css', function () {
 
 gulp.task('build', ['index.html', 'js', 'css']);
 
-gulp.task('build:dist', ['index.html', 'js:dist', 'css'], function () {
-  gulp.src(paths.tmp + '/**/*')
+gulp.task('build:dist', ['index.html', 'js:no-istanbul', 'css'], function () {
+  var jsFilter = $.filter('**/*.js');
+  var cssFilter = $.filter('**/*.css');
+  var htmlFilter = $.filter('**/*.html');
+  var assets = $.useref.assets();
+
+  return gulp.src(paths.tmp + '/index.html')
+    .pipe(assets)
+    .pipe($.rev())
+
+    .pipe(jsFilter)
+    .pipe($.uglify())
+    .pipe(jsFilter.restore())
+
+    .pipe(cssFilter)
+    .pipe(cssFilter.restore())
+
+    .pipe(assets.restore())
+    .pipe($.useref())
+    .pipe($.revReplace())
+
+    .pipe(htmlFilter)
+    .pipe($.minifyHtml())
+    .pipe(htmlFilter.restore())
+    
     .pipe(gulp.dest(paths.dist));
 });
 
