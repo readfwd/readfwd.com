@@ -7,7 +7,7 @@ var app = express();
 // Enable gzip compression.
 app.use(compression());
 
-// Enable PhantomJS-enabled SEO.
+// Enable PhantomJS SEO.
 app.use(seo());
 
 app.use('/', express.static(__dirname + '/dist'));
