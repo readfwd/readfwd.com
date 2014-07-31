@@ -1,5 +1,9 @@
 'use strict';
 
+// Usually production environments don't have GUIs
+/* global process */
+var isDevelopment = process.env.DISPLAY;
+
 var gulp = require('gulp');
 
 var config = require('./_config.js');
@@ -9,6 +13,7 @@ var $ = config.plugins;
 var source = require('vinyl-source-stream');
 var browserify = require('browserify');
 var istanbul = require('browserify-istanbul');
+var templatizer = require('templatizer');
 
 gulp.task('clean', function () {
   return gulp.src(paths.tmp, { read: false })
@@ -20,14 +25,18 @@ gulp.task('build', ['index.html', 'js', 'css']);
 gulp.task('index.html', function () {
   return gulp.src(paths.app + '/index.jade')
     .pipe($.jade({
-      pretty: true
+      pretty: !isDevelopment,
+      compileDebug: isDevelopment
     }))
     .pipe(gulp.dest(paths.tmp));
 });
 
-gulp.task('jade', function () {
-  return gulp.src(paths.app + '/*.html')
-    .pipe(gulp.dest(paths.tmp));
+gulp.task('templates', function () {
+  templatizer(paths.templates, paths.tmp + '/js/templates.js', { jade : {
+    doctype: 'html',
+    pretty: !isDevelopment,
+    compileDebug: isDevelopment
+  }});
 });
 
 gulp.task('js', function () {

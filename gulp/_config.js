@@ -7,5 +7,6 @@ module.exports.paths = {
   'tmp': './.tmp',
   'dist': './dist',
   'app': './app',
-  'test': './test'
+  'test': './test',
+  'templates': './app/templates'
 };
