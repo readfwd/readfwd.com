@@ -33,17 +33,20 @@
     "gulp-mocha": "^0.5.2",
     "gulp-rename": "^1.2.0",
     "gulp-rimraf": "^0.1.0",
+    "gulp-util": "^3.0.0",
+    "jquery": "^2.1.1",
     "karma": "^0.12.19",
     "karma-coverage": "git://github.com/readfwd/karma-coverage.git#master",
     "karma-mocha": "^0.1.6",
     "karma-mocha-reporter": "^0.2.8",
     "karma-osx-reporter": "^0.1.0",
     "karma-phantomjs-launcher": "^0.1.4",
+    "lodash": "^2.4.1",
     "mocha": "^1.21.3",
+    "ngrok": "^0.1.97",
+    "psi": "^0.1.1",
     "require-dir": "^0.1.0",
     "should": "^4.0.4",
-    "vinyl-source-stream": "^0.1.1",
-    "lodash": "^2.4.1",
-    "jquery": "^2.1.1"
+    "vinyl-source-stream": "^0.1.1"
   }
 }

@@ -8,6 +8,10 @@ var paths = config.paths;
 
 var karma = require('karma').server;
 
+var browserSync = require('browser-sync');
+var pagespeed = require('psi');
+var ngrok = require('ngrok');
+
 var karmaConf = {
   browsers: ['PhantomJS'],
   frameworks: ['mocha'],
@@ -35,5 +39,28 @@ gulp.task('test', function (done) {
 
 gulp.task('test:once', ['build'], function () {
   karma.start(_.assign({}, karmaConf, { singleRun: true }));
+});
+
+gulp.task('pagespeed', ['build:dist'], function () {
+  browserSync({
+    server: {
+      baseDir: paths.dist
+    },
+    open: false
+  }, function (err, bs) {
+    if (err) {
+      console.log(err);
+      process.exit(0);
+    }
+
+    ngrok.connect(bs.options.port, function(err, url) {
+      pagespeed({
+        url: url,
+        strategy: 'mobile'
+      }, function () {
+        process.exit(0);
+      });
+    });
+  });
 });
 
