@@ -10,7 +10,10 @@ app.use(compression());
 // Enable PhantomJS SEO.
 if (process.env.REDISCLOUD_URL) {
   // If we've got Redis available, use that.
-  app.use(seo({ cacheClient: 'rediscloud' }));
+  app.use(seo({
+    cacheClient: 'redis',
+    redisURL: process.env.REDISCLOUD_URL
+  }));
 } else {
   // Otherwise, use regular disk-based cache.
   app.use(seo());
