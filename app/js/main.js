@@ -3,17 +3,51 @@
 var $ = require('./shims/jquery');
 var _ = require('lodash');
 var MainView = require('./views/main');
-var Posts = require('./models/posts-collection');
 var Router = require('./router');
 var loadcss = require('./lib/loadcss');
-var browser = require('bowser').br;
+var browser = require('bowser').browser;
 
 
 module.exports = {
   launch: _.once(function () {
-    window.app = this;
-    document.title = 'Altceva!';
-  })
+    var self = window.app = this;
+
+    this.router = new Router();
+
+    //Wait for the DOM to be rendered.
+    $(document).ready(function () {
+      loadcss('/css/main.css');
+
+      //Initialize the main view.
+      var mainView = self.view = new MainView({
+        el: document.body
+      });
+
+      //Render the main view.
+      mainView.render();
+
+      //Listen for 'newPage' event from the router
+      self.router.on('newPage', mainView.setPage, mainView);
+
+      //Verify if the enviromnet is localhost or not and use pushState URL accordingly
+      var isLocal = false;
+      if (window.location.host.indexOf('localhost') !== -1) {
+        // Use non-pushState URLs for localhost dev for BrowserSync.
+        isLocal = true;
+      }
+      var usePushState = !isLocal;
+
+      self.router.history.start({
+        root: '/',
+        pushState: usePushState
+      });
+    });
+  }),
+
+  navigate: function (page) {
+    var url = (page.charAt(0) === '/') ? page.slice(1) : page;
+    this.router.history.navigate(url, { trigger: true});
+  }
 };
 
 module.exports.launch();
