@@ -27,7 +27,9 @@ module.exports = View.extend({
     });
 
     this.$('.nav a').on('click', function () {
-      self.$('.navbar-toggle').click();
+      if (window.innerWidth < 768) {
+        self.$('.navbar-toggle').click();
+      }
     });
 
     return this;
