@@ -15,6 +15,8 @@ module.exports = View.extend({
   render: function () {
     this.$el.html(this.template());
     this.generateMap();
+
+
     return this;
   },
   generateMap: function () {
@@ -33,6 +35,13 @@ module.exports = View.extend({
       verticalAlign: 'middle',
       horizontalAlign: 'middle'
     });
+    // #yolo
+    var self = this;
+    setTimeout(function () {
+      self.map.refresh();
+      self.map.setCenter(44.43521432961795, 26.118552069371407);
+    }, 1);
+
   },
 
   generateRoute: function () {
