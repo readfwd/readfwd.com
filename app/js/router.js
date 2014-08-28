@@ -9,8 +9,8 @@ var AboutUsPage = require('./pages/aboutUs');
 module.exports = Router.extend({
   routes: {
     '': 'home',
-    'contact': 'contact',
-    'about': 'about'
+    'contact/': 'contact',
+    'about/': 'about'
   },
 
   //Handlers
