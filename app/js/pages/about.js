@@ -6,7 +6,7 @@ var templates = require('../lib/templates');
 
 module.exports = View.extend({
   pageTitle: 'Read Forward | About Us',
-  template: templates.pages.aboutUs,
+  template: templates.pages.about,
   render: function () {
     this.$el.html(this.template());
     return this;
