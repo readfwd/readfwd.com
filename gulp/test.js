@@ -7,7 +7,6 @@ var config = require('./_config.js');
 var paths = config.paths;
 
 var karma = require('karma').server;
-
 var pagespeed = require('psi');
 var ngrok = require('ngrok');
 
@@ -16,7 +15,9 @@ var karmaConf = {
   frameworks: ['mocha'],
   preprocessors: {},
   files: [
-    paths.tmp + "/js/main.js",
+    paths.app + '/bower_components/jquery/dist/jquery.min.js',
+    paths.app + '/bower_components/bootstrap/dist/js/bootstrap.min.js',
+    paths.tmp + '/js/main.js',
     './node_modules/should/should.min.js',
     paths.test + '/**/*.spec.js'
   ],
@@ -32,15 +33,18 @@ var karmaConf = {
 
 karmaConf.preprocessors[paths.tmp + '/js/main.js'] = ['coverage'];
 
+// Start the TDD workflow.
 gulp.task('test', function (done) {
   karma.start(karmaConf, done);
 });
 
-gulp.task('test:once', ['build'], function () {
+// Run the tests only once, while also building for CI.
+gulp.task('test:once', ['build:test'], function () {
   karma.start(_.assign({}, karmaConf, { singleRun: true }));
 });
 
-gulp.task('pagespeed', ['build:dist'], function (done) {
+// Run the pagespeed workflow, targeting a local server.
+gulp.task('pagespeed', function (done) {
   ngrok.connect(parseInt(process.env.PORT), function(err, url) {
     pagespeed({
       url: url,
@@ -51,4 +55,3 @@ gulp.task('pagespeed', ['build:dist'], function (done) {
     });
   });
 });
-
